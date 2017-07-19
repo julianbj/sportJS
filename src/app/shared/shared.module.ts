@@ -5,6 +5,8 @@ import { PopinComponent } from './popin/popin.component';
 import { AutoFocusDirective } from './auto-focus/auto-focus.directive';
 import { ProgramService } from './program/program.service';
 import { RecordService } from './record/record.service';
+import { ParsebreaklinePipe } from './utils/parsebreakline.pipe';
+import { FilterByCategoryPipe } from './utils/filter-by-category.pipe';
 
 @NgModule({
   imports: [
@@ -13,13 +15,17 @@ import { RecordService } from './record/record.service';
   ],
   declarations: [
     PopinComponent,
-    AutoFocusDirective
+    AutoFocusDirective,
+    ParsebreaklinePipe,
+    FilterByCategoryPipe
   ],
   exports: [
     CommonModule,
     ReactiveFormsModule,
     PopinComponent,
-    AutoFocusDirective
+    AutoFocusDirective,
+    ParsebreaklinePipe,
+    FilterByCategoryPipe
   ],
   providers: [
     ProgramService,

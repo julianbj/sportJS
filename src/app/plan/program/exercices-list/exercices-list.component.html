@@ -1,32 +1,39 @@
 
-<div class="nb-exercices">Il y a #todoNombre exercices.</div>
-<div class="no-exercices">Aucun exercice dans de programme</div>
+<div class="nb-exercices" *ngIf="exercices.length">Il y a {{exercices.length}} exercices.</div>
+<div class="no-exercices" *ngIf="!exercices.length">Aucun exercice dans de programme</div>
 
 <table>
-  <tr class="exercice">
+  <tr class="exercice" *ngFor="let exercice of exercices; let first = first; let last = last">
     <td class="exercice-category">
-      <i class="fi flaticon-people flaticon-man-cycling flaticon-weightlifting"></i>
+      <i class="fi" [ngClass]="{'flaticon-people':exercice.category==='LESSON',
+                                'flaticon-man-cycling':exercice.category==='CARDIO_TRAINING',
+                                'flaticon-weightlifting':exercice.category==='REINFORCEMENT'}" [style.color]="'red'"></i>
     </td>
-    <td>#todoType</td>
+    <td>{{exercice.type}}</td>
     <td>
-      #todoDuree
-      à
-      #todoVitesse
-      #todoPoids
-      #todoNbRépétition
+      {{exercice.duration}}
+      <span *ngIf="exercice.duration && exercice.speed">
+       à
+      </span>
+      {{exercice.speed}}
+      {{exercice.weigth}}
+      {{exercice.nbRepetion}}
+      <span *ngIf="exercice.nbMouvement">
       x
-      #todoNbMouvements
+      </span>
+      {{exercice.nbMouvement}}
     </td>
-    <td>#todoComment</td>
+    <td>{{exercice.comment}}</td>
     <td class="actions">
         <div class="ordering">
-          <i class="fa fa-arrow-up" aria-hidden="true"></i>
-          <i class="fa fa-arrow-down" aria-hidden="true"></i>
+          <i (click)="up(exercice)" class="fa fa-arrow-up" aria-hidden="true" *ngIf="!first"></i>
+          <i (click)="down(exercice)" class="fa fa-arrow-down" aria-hidden="true" *ngIf="!last"></i>
           <ng-template #emptyCell><div>&nbsp;</div></ng-template>
         </div>
         <div class="deleting">
-          <i class="fa fa-trash-o" aria-hidden="true"></i>
+          <i (click)="delete(exercice)" class="fa fa-trash-o" aria-hidden="true"></i>
         </div>
     </td>
   </tr>
 </table>
+

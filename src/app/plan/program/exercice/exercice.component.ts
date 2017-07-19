@@ -3,6 +3,7 @@ import { CARDIO_TRAINING, Exercice, EXERCICE_TYPES, LESSON, REINFORCEMENT } from
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormUtils } from '../../../shared/utils/form-utils';
 
+
 const errorMessage = {
   categoryRequired: 'il faut choisir entre cours, cardio et renforcement',
   typeRequired: 'le type est obligatoire',
@@ -100,5 +101,4 @@ export class ExerciceComponent implements OnInit {
   getTitle(): string {
     return FormUtils.formatTitleWithErrorMessages(this.exerciceForm, errorMessage);
   }
-
 }

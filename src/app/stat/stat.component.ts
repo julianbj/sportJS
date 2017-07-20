@@ -21,8 +21,19 @@ export class StatComponent implements OnInit {
               private resizeGraphService: ResizeGraphService) { }
 
   ngOnInit() {
+    const mouseDown$ = Observable.fromEvent(this.separator.nativeElement, 'mousedown');
+    const mouseMove$ = Observable.fromEvent(document, 'mousemove');
+    const mouseUp$ = Observable.fromEvent(document, 'mouseup');
+    mouseDown$
+      .mergeMap(e => mouseMove$.takeUntil(mouseUp$)) // A chaque mousedown on eoute mousemove
+      .subscribe((e: MouseEvent) => {
+        const widths = this.getBlocksWidth(e.x);
 
-    // TODO exo-obs
+        this.leftBlock.nativeElement.setAttribute('style', `width:${widths.leftWidth}px`);
+        this.rightBlock.nativeElement.setAttribute('style', `width:${widths.rightWidth}px`);
+        this.resizeGraphService.setWidth(widths.rightWidth);
+      });
+
 
     const separatorRec = this.separator.nativeElement.getBoundingClientRect();
     const blocksWidth = this.getBlocksWidth(separatorRec.left + separatorRec.width / 2);

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Exercice} from "../../../shared/program/exercice";
 
 @Component({
@@ -8,7 +8,7 @@ import {Exercice} from "../../../shared/program/exercice";
 })
 export class ExercicesListComponent implements OnInit {
 
-  exercices: Exercice[] = [];
+  @Input() exercices: Exercice[] = [];
 
   constructor() { }
 
